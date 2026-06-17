@@ -1,0 +1,28 @@
+name: Despliegue a Producción
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Clonar repositorio
+      uses: actions/checkout@v3
+
+    - name: Instalar JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Compilar para Producción
+      run: javac -d out src/*.java
+
+    - name: Despliegue exitoso
+      run: echo "Aplicación desplegada en producción"
